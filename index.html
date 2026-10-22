@@ -6,44 +6,80 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Video Splitter</title>
+    <title>potongin · Potong video langsung di browser</title>
+    <meta
+      name="description"
+      content="potongin: potong video langsung di browser tanpa unggah dan tanpa instal. Simpan satu bagian atau bagi jadi beberapa klip. Gratis."
+    />
+    <meta name="theme-color" content="#1d7a4e" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="potongin · Potong video langsung di browser"
+    />
+    <meta
+      property="og:description"
+      content="Video kepanjangan? Potong aja. Tanpa unggah, tanpa instal, diproses di perangkatmu."
+    />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "potongin",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "inLanguage": ["id", "en"],
+        "description": "Potong video langsung di browser tanpa unggah dan tanpa instal.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         box-sizing: border-box;
         padding-top: env(safe-area-inset-top, 0px);
         padding-bottom: env(safe-area-inset-bottom, 0px);
-        --bg: #f6f5f1;
+        --bg: #f5f8f6;
         --card: #fff;
-        --tx: #1d1d1b;
-        --mut: #6b6a64;
-        --ac: #c4562d;
+        --tx: #14231b;
+        --mut: #5f7167;
+        --ac: #1d7a4e;
         --acx: #fff;
-        --bd: #e2e0d8;
-        --ok: #2d7a4f;
+        --bd: #dce7e0;
+        --soft: #e9f4ed;
+        --ok: #1d7a4e;
       }
       @media (prefers-color-scheme: dark) {
         :root:not([data-theme="light"]) {
           color-scheme: dark;
-          --bg: #161615;
-          --card: #222220;
-          --tx: #f0efe9;
-          --mut: #9a988f;
-          --ac: #e8794f;
-          --acx: #161615;
-          --bd: #363633;
-          --ok: #5cc98a;
+          --bg: #0e1712;
+          --card: #16231b;
+          --tx: #e9f2ed;
+          --mut: #93a79b;
+          --ac: #43b97e;
+          --acx: #06130b;
+          --bd: #26382d;
+          --soft: #1b3125;
+          --ok: #43b97e;
         }
       }
       :root[data-theme="dark"] {
         color-scheme: dark;
-        --bg: #161615;
-        --card: #222220;
-        --tx: #f0efe9;
-        --mut: #9a988f;
-        --ac: #e8794f;
-        --acx: #161615;
-        --bd: #363633;
-        --ok: #5cc98a;
+        --bg: #0e1712;
+        --card: #16231b;
+        --tx: #e9f2ed;
+        --mut: #93a79b;
+        --ac: #43b97e;
+        --acx: #06130b;
+        --bd: #26382d;
+        --soft: #1b3125;
+        --ok: #43b97e;
       }
       html {
         scroll-padding-top: env(safe-area-inset-top, 0px);
@@ -58,199 +94,196 @@
         background: var(--bg);
         color: var(--tx);
         font:
-          16px/1.45 system-ui,
+          16px/1.5 Inter,
+          system-ui,
           -apple-system,
           "Segoe UI",
+          Roboto,
           sans-serif;
+      }
+      .ic {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex: none;
+      }
+      header {
+        background: var(--card);
+        border-bottom: 1px solid var(--bd);
+      }
+      .hd {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: -0.02em;
+        margin-right: auto;
+      }
+      .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--ac);
+        display: grid;
+        place-items: center;
+      }
+      .logo svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--acx);
+        fill: none;
+        stroke-width: 2;
+      }
+      #lang {
+        padding: 6px 8px;
+        border-radius: 10px;
+        border: 1px solid var(--bd);
+        background: var(--card);
+        color: var(--tx);
+        font: inherit;
+        font-size: 0.8rem;
+      }
+      .iconb {
+        background: none;
+        border: 0;
+        color: var(--mut);
+        padding: 4px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+      .iconb .ic {
+        width: 26px;
+        height: 26px;
       }
       main {
         max-width: 640px;
         margin: 0 auto;
-        padding: 16px;
+        padding: 22px 20px 8px;
+      }
+      .eyebrow {
+        color: var(--ac);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ac);
       }
       h1 {
-        font-size: 1.4rem;
-        margin: 8px 0 14px;
+        font-size: 2.3rem;
+        line-height: 1.15;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        margin: 14px 0 12px;
       }
-      .vp {
-        margin: 26px 0 8px;
-      }
-      .vp h2 {
-        font-size: 1.15rem;
-        margin: 0 0 4px;
-      }
-      .vpg {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 10px;
-        margin-top: 10px;
-      }
-      .vpc {
-        background: var(--card);
-        border: 1px solid var(--bd);
-        border-radius: 14px;
-        padding: 14px;
-      }
-      .vpc .ic {
-        font-size: 1.4rem;
-        margin-bottom: 4px;
-      }
-      .vpc p {
-        margin: 4px 0 0;
-        font-size: 0.88rem;
+      .sub {
         color: var(--mut);
+        margin: 0 0 22px;
       }
-      footer {
-        max-width: 640px;
-        margin: 0 auto;
-        padding: 14px 16px 24px;
-        border-top: 1px solid var(--bd);
-        color: var(--mut);
-        font-size: 0.8rem;
-        text-align: center;
-      }
-      footer b {
-        color: var(--tx);
-        font-size: 0.9rem;
-      }
-      footer p {
-        margin: 6px 0;
-      }
-      .support {
-        margin: 22px 0 8px;
-        background: var(--card);
-        border: 1px solid var(--ac);
-        border-radius: 14px;
-        padding: 16px;
-      }
-      .support h2 {
-        font-size: 1.1rem;
-        margin: 0 0 6px;
-      }
-      .support p {
-        margin: 0 0 12px;
-        font-size: 0.92rem;
-      }
-      a.btn {
-        display: inline-block;
-        text-decoration: none;
-        text-align: center;
-        background: var(--ac);
-        color: var(--acx);
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-weight: 600;
-      }
-      .support a.btn {
-        flex: 1 1 auto;
-      }
-      .thx {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-top: 12px;
-        padding: 10px 12px;
-        border: 1px dashed var(--ac);
-        border-radius: 12px;
-        font-size: 0.88rem;
-      }
-      .thx span {
-        flex: 1 1 180px;
-      }
-      footer a {
-        color: var(--ac);
-        font-weight: 600;
-        text-decoration: none;
-      }
-      .support .hint a {
-        color: var(--mut);
-      }
-      .top {
+      #steps {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 0.82rem;
+        color: var(--mut);
       }
-      #lang {
-        padding: 8px;
-        border-radius: 10px;
-        border: 1px solid var(--bd);
-        background: var(--card);
+      .stp {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .stp i {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--soft);
+        display: grid;
+        place-items: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.78rem;
+      }
+      .stp.on {
         color: var(--tx);
-        font: inherit;
-        font-size: 0.85rem;
-        max-width: 50%;
+        font-weight: 600;
+      }
+      .stp.on i,
+      .stp.done i {
+        background: var(--ac);
+        color: var(--acx);
+      }
+      .stp.done i {
+        opacity: 0.7;
       }
       .card {
         background: var(--card);
         border: 1px solid var(--bd);
-        border-radius: 14px;
-        padding: 14px;
-        margin-bottom: 14px;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 16px;
       }
-      video {
-        width: 100%;
-        max-height: 45vh;
-        border-radius: 10px;
-        background: #000;
-        display: none;
-        margin-top: 10px;
+      .drop {
+        border: 2px dashed var(--bd);
+        text-align: center;
+        padding: 26px 18px;
       }
-      button,
-      input {
-        font: inherit;
+      .upic {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        background: var(--soft);
+        color: var(--ac);
+        display: grid;
+        place-items: center;
+        margin: 0 auto 12px;
       }
-      button {
-        background: var(--ac);
-        color: var(--acx);
-        border: 0;
-        border-radius: 10px;
-        padding: 10px 14px;
-        font-weight: 600;
-        cursor: pointer;
+      .upic .ic {
+        width: 30px;
+        height: 30px;
       }
-      button.sec {
-        background: transparent;
-        color: var(--tx);
-        border: 1px solid var(--bd);
+      .drop h2 {
+        font-size: 1.15rem;
+        margin: 0 0 2px;
       }
-      #modes button.on {
-        background: var(--ac);
-        color: var(--acx);
-        border-color: var(--ac);
-      }
-      button:disabled {
-        opacity: 0.45;
-        cursor: default;
-      }
-      input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid var(--bd);
-        background: var(--bg);
-        color: var(--tx);
-      }
-      .row {
-        display: flex;
-        gap: 8px;
-        align-items: flex-end;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-      }
-      .row > * {
-        flex: 1 1 0;
-        min-width: 0;
+      .drop p {
+        margin: 0 0 16px;
+        color: var(--mut);
+        font-size: 0.92rem;
       }
       .pick {
         position: relative;
-        display: block;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
         background: var(--ac);
         color: var(--acx);
-        border-radius: 10px;
-        padding: 14px;
+        border-radius: 14px;
+        padding: 15px;
         font-weight: 600;
         overflow: hidden;
       }
@@ -263,46 +296,221 @@
         cursor: pointer;
         font-size: 100px;
       }
-      .seg {
-        display: grid;
-        grid-template-columns: 1fr 1fr auto;
-        gap: 8px;
-        margin-bottom: 8px;
-        align-items: end;
-      }
-      label {
-        font-size: 0.78rem;
+      .note {
         color: var(--mut);
-        display: block;
-        margin-bottom: 3px;
+        font-size: 0.78rem;
+        margin-top: 14px;
+      }
+      video {
+        width: 100%;
+        max-height: 42vh;
+        border-radius: 14px;
+        background: #000;
+        display: none;
+        margin: 0 0 12px;
+      }
+      .stat {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: var(--mut);
+        margin: 0 2px 8px;
+      }
+      .stat span:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      #cur {
+        font-variant-numeric: tabular-nums;
+        flex: none;
+      }
+      #tl {
+        display: flex;
+        gap: 4px;
+        background: var(--soft);
+        padding: 6px;
+        border-radius: 12px;
+      }
+      #tl canvas {
+        flex: 1 1 0;
+        min-width: 0;
+        height: 34px;
+        border-radius: 6px;
+        background: var(--card);
       }
       .hint {
         color: var(--mut);
-        font-size: 0.85rem;
-        margin: 6px 0;
+        font-size: 0.8rem;
+        margin: 8px 2px;
       }
-      .res {
+      h2.h {
+        font-size: 1.2rem;
+        margin: 0 0 2px;
+      }
+      .opt {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        gap: 8px;
-        padding: 8px 0;
-        border-top: 1px solid var(--bd);
+        gap: 14px;
+        width: 100%;
+        text-align: left;
+        background: var(--card);
+        color: var(--tx);
+        border: 1.5px solid var(--bd);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin-top: 10px;
+        font-weight: 400;
+        cursor: pointer;
       }
-      .res span {
-        font-size: 0.9rem;
-        overflow-wrap: anywhere;
+      .opt .ic {
+        color: var(--mut);
       }
-      .res button {
+      .opt span {
+        flex: 1;
+      }
+      .opt b {
+        display: block;
+        font-weight: 600;
+      }
+      .opt small {
+        color: var(--mut);
+        font-size: 0.82rem;
+      }
+      .opt .rad {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid var(--bd);
         flex: none;
-        padding: 8px 12px;
+      }
+      .opt.on {
+        background: var(--soft);
+        border-color: var(--ac);
+      }
+      .opt.on .rad {
+        border-color: var(--ac);
+        background: radial-gradient(var(--ac) 0 38%, transparent 42%);
+      }
+      .opt.on .ic {
+        color: var(--ac);
+      }
+      button {
+        font: inherit;
+        background: var(--ac);
+        color: var(--acx);
+        border: 0;
+        border-radius: 14px;
+        padding: 12px 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.sec,
+      .tg button {
+        background: transparent;
+        color: var(--tx);
+        border: 1px solid var(--bd);
+      }
+      .tg {
+        display: none;
+        gap: 6px;
+        margin-top: 12px;
+      }
+      .tg button {
+        flex: 1;
+        padding: 9px;
+        border-radius: 12px;
+        font-size: 0.88rem;
+      }
+      .tg button.on {
+        background: var(--soft);
+        border-color: var(--ac);
+        color: var(--ac);
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      label {
+        font-size: 0.8rem;
+        color: var(--mut);
+        display: block;
+        margin-bottom: 4px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 13px 40px 13px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--bd);
+        background: var(--card)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a9a92' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E")
+          no-repeat right 12px center/18px;
+        color: var(--tx);
+        font: inherit;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        margin: 10px 0;
+      }
+      .row > * {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+      .seg {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 10px;
+        margin: 14px 0 6px;
+        align-items: end;
+      }
+      .seg button {
+        padding: 12px;
+      }
+      .fast {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin: 16px 0;
+      }
+      .fast input {
+        width: 22px;
+        height: 22px;
+        accent-color: var(--ac);
+        margin-top: 2px;
+        flex: none;
+      }
+      .fast b {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--tx);
+        font-size: 0.95rem;
+      }
+      .fast b .ic {
+        width: 16px;
+        height: 16px;
+        fill: var(--ac);
+        stroke: var(--ac);
+      }
+      .fast small {
+        color: var(--mut);
+        font-size: 0.82rem;
+        display: block;
+      }
+      #go {
+        width: 100%;
+        padding: 16px;
       }
       #bar {
         height: 8px;
-        background: var(--bd);
+        background: var(--soft);
         border-radius: 4px;
         overflow: hidden;
-        margin-top: 10px;
+        margin-top: 12px;
         display: none;
       }
       #bar i {
@@ -324,43 +532,302 @@
         }
       }
       #st {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         color: var(--mut);
-        margin-top: 6px;
+        margin-top: 8px;
+        text-align: center;
       }
       #autoMsg {
         color: var(--ok);
         font-weight: 600;
       }
+      details {
+        text-align: center;
+        margin: 6px 0 4px;
+        color: var(--mut);
+        font-size: 0.88rem;
+      }
+      summary {
+        color: var(--ac);
+        font-weight: 600;
+        cursor: pointer;
+        list-style: none;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      details ol {
+        text-align: left;
+        margin: 12px 0 0;
+        padding-left: 20px;
+      }
+      .feat {
+        margin: 34px 0 8px;
+      }
+      .feat h2 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+      }
+      .fi {
+        display: flex;
+        gap: 14px;
+        margin-top: 22px;
+      }
+      .fi .ic {
+        width: 46px;
+        height: 46px;
+        padding: 12px;
+        border-radius: 14px;
+        background: var(--soft);
+        color: var(--ac);
+      }
+      .fi b {
+        display: block;
+      }
+      .fi p {
+        margin: 2px 0 0;
+        color: var(--mut);
+        font-size: 0.9rem;
+      }
+      .support {
+        background: var(--soft);
+        border: 0;
+        border-radius: 24px;
+        padding: 24px;
+        margin: 30px 0 16px;
+      }
+      .support .cup {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: var(--card);
+        color: var(--ac);
+        display: grid;
+        place-items: center;
+        margin-bottom: 14px;
+      }
+      .support h2 {
+        font-size: 1.6rem;
+        margin: 0 0 8px;
+        letter-spacing: -0.02em;
+      }
+      .support p {
+        color: var(--mut);
+        margin: 0 0 16px;
+      }
+      a.btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        text-align: center;
+        background: var(--ac);
+        color: var(--acx);
+        padding: 15px;
+        border-radius: 14px;
+        font-weight: 600;
+      }
+      .thx {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 14px;
+        padding: 12px;
+        border: 1px dashed var(--ac);
+        border-radius: 14px;
+        font-size: 0.88rem;
+      }
+      .thx span {
+        flex: 1 1 180px;
+      }
+      .thx a.btn {
+        padding: 10px 14px;
+      }
+      .thx button {
+        padding: 10px 14px;
+        flex: none;
+      }
+      .sn {
+        text-align: center;
+        color: var(--mut);
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
+      .sn button {
+        background: none;
+        border: 0;
+        color: var(--mut);
+        text-decoration: underline;
+        padding: 4px;
+        font-weight: 400;
+        font-size: 0.8rem;
+      }
+      .res {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      footer {
+        border-top: 1px solid var(--bd);
+        background: var(--card);
+        margin-top: 30px;
+      }
+      .ft {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 24px 20px 30px;
+        color: var(--mut);
+        font-size: 0.85rem;
+      }
+      .ft .brand {
+        color: var(--tx);
+        margin-bottom: 8px;
+      }
+      .ft p {
+        margin: 6px 0;
+      }
     </style>
   </head>
   <body>
-    <main>
-      <div class="top">
-        <h1>✂️ <span data-i="title"></span></h1>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path
+            d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"
+          />
+        </symbol>
+        <symbol id="i-video" viewBox="0 0 24 24">
+          <rect x="3" y="7" width="12" height="10" rx="2" />
+          <path d="M15 11l5-3v8l-5-3" />
+        </symbol>
+        <symbol id="i-keep" viewBox="0 0 24 24">
+          <circle cx="6" cy="7" r="1.8" />
+          <circle cx="6" cy="17" r="1.8" />
+          <path d="M11 7h9M11 17h9" />
+        </symbol>
+        <symbol id="i-split" viewBox="0 0 24 24">
+          <rect x="4" y="5" width="16" height="14" rx="2" />
+          <path d="M9.3 5v14M14.7 5v14" />
+        </symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24">
+          <path d="M13 2L4 14h7l-1 8 9-12h-7z" />
+        </symbol>
+        <symbol id="i-help" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path
+            d="M9.5 9.5a2.5 2.5 0 114 2c-1 .7-1.5 1.2-1.5 2.5M12 17.5v.01"
+          />
+        </symbol>
+        <symbol id="i-focus" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="2" />
+        </symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24">
+          <path d="M4 7h9M18 7h2M4 17h2M11 17h9" />
+          <circle cx="15.5" cy="7" r="2" />
+          <circle cx="8.5" cy="17" r="2" />
+        </symbol>
+        <symbol id="i-cup" viewBox="0 0 24 24">
+          <path
+            d="M4 9h13v4a5 5 0 01-5 5H9a5 5 0 01-5-5V9zM17 10h1.5a2.5 2.5 0 010 5H17M8 3v3M12 3v3"
+          />
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+          <path d="M12 20s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </symbol>
+        <symbol id="i-dots" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="2.4" />
+          <circle cx="12" cy="17" r="2.4" />
+        </symbol>
+      </defs>
+    </svg>
+    <header>
+      <div class="hd">
+        <div class="brand">
+          <span class="logo"
+            ><svg><use href="#i-dots" /></svg></span
+          ><span>potongin</span>
+        </div>
         <select id="lang" aria-label="Language">
           <option value="id">Bahasa Indonesia</option>
           <option value="en">English</option>
         </select>
+        <button class="iconb" id="help" aria-label="Help" data-i-aria="help">
+          <svg class="ic"><use href="#i-help" /></svg>
+        </button>
+      </div>
+    </header>
+    <main>
+      <div class="eyebrow" data-i="eyebrow"></div>
+      <h1 data-i="h1"></h1>
+      <p class="sub" data-i="sub"></p>
+      <div id="steps">
+        <div class="stp on"><i>1</i><span data-i="s1"></span></div>
+        <div class="stp"><i>2</i><span data-i="s2"></span></div>
+        <div class="stp"><i>3</i><span data-i="s3"></span></div>
       </div>
 
-      <div class="card">
+      <div class="card drop">
+        <div class="upic">
+          <svg class="ic"><use href="#i-video" /></svg>
+        </div>
+        <h2 data-i="upTitle"></h2>
+        <p data-i="upSub"></p>
         <div class="pick">
-          <span data-i="pick"></span
+          <svg class="ic"><use href="#i-up" /></svg><span data-i="upBtn"></span
           ><input type="file" id="file" accept="video/*" />
         </div>
-        <video id="v" controls playsinline></video>
-        <div class="hint" id="info"></div>
+        <div class="note" data-i="upNote"></div>
       </div>
 
-      <div class="card">
-        <div class="row" id="modes">
-          <button class="sec on" data-m="man" data-i="man"></button>
-          <button class="sec" data-m="dur" data-i="dur"></button>
-          <button class="sec" data-m="num" data-i="num"></button>
+      <video id="v" controls playsinline></video>
+      <div class="stat">
+        <span id="info"></span><span id="cur">00:00:00 / 00:00:00</span>
+      </div>
+      <div id="tl">
+        <canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas
+        ><canvas width="64" height="40"></canvas>
+      </div>
+      <div class="hint" id="tlHint" data-i="tlHint"></div>
+
+      <div class="card" style="margin-top: 18px">
+        <h2 class="h" data-i="optH"></h2>
+        <div class="hint" style="margin: 0" data-i="optSub"></div>
+        <button type="button" class="opt on" data-m="man">
+          <svg class="ic"><use href="#i-keep" /></svg
+          ><span><b data-i="optMan"></b><small data-i="optManD"></small></span
+          ><i class="rad"></i>
+        </button>
+        <button type="button" class="opt" data-m="dur">
+          <svg class="ic"><use href="#i-split" /></svg
+          ><span
+            ><b data-i="optSplit"></b><small data-i="optSplitD"></small></span
+          ><i class="rad"></i>
+        </button>
+        <div class="tg" id="splitTg">
+          <button type="button" data-m="dur" data-i="dur"></button
+          ><button type="button" data-m="num" data-i="num"></button>
         </div>
 
-        <div id="auto" style="display: none">
+        <div id="auto" style="display: none; margin-top: 14px">
           <div class="row">
             <div>
               <label data-i="totL"></label
@@ -368,7 +835,7 @@
                 type="text"
                 id="totV"
                 autocomplete="off"
-                placeholder="05:30"
+                placeholder="00:05:30"
               />
             </div>
             <div>
@@ -377,7 +844,7 @@
                 type="text"
                 id="autoV"
                 autocomplete="off"
-                placeholder="01:00"
+                placeholder="00:01:00"
               />
             </div>
           </div>
@@ -385,44 +852,55 @@
           <div class="hint" id="autoMsg"></div>
         </div>
 
-        <div id="manualBar" class="row">
-          <div><span data-i="pos"></span> <b id="cur">00:00</b></div>
-          <button class="sec" id="setS" data-i="setS"></button>
-          <button class="sec" id="setE" data-i="setE"></button>
-        </div>
-
         <div
           class="hint"
           id="segHead"
-          style="font-weight: 600; color: var(--tx)"
+          style="font-weight: 600; color: var(--tx); margin-top: 14px"
         ></div>
         <div id="segs"></div>
-        <label
-          style="
-            display: flex;
-            gap: 8px;
-            align-items: flex-start;
-            color: var(--tx);
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-          "
-          ><input
-            type="checkbox"
-            id="fast"
-            checked
-            style="margin-top: 3px" /><span data-i="fastTxt"></span
-        ></label>
-        <div class="row">
-          <button class="sec" id="add" data-i="add"></button>
-          <button id="go" disabled data-i="go"></button>
+        <div class="hint" data-i="fmtHint"></div>
+        <div id="manualBar" class="row">
+          <button
+            class="sec"
+            id="setS"
+            data-i="setS"
+            style="font-size: 0.8rem; padding: 9px"
+          ></button>
+          <button
+            class="sec"
+            id="setE"
+            data-i="setE"
+            style="font-size: 0.8rem; padding: 9px"
+          ></button>
         </div>
+        <button
+          class="sec"
+          id="add"
+          data-i="add"
+          style="width: 100%; margin-bottom: 6px"
+        ></button>
+
+        <label class="fast"
+          ><input type="checkbox" id="fast" checked /><span
+            ><b
+              ><svg class="ic"><use href="#i-bolt" /></svg
+              ><span data-i="fastT"></span></b
+            ><small data-i="fastD"></small></span
+        ></label>
+        <button id="go" disabled data-i="go"></button>
+        <div
+          class="hint"
+          id="goHint"
+          style="text-align: center"
+          data-i="goHint"
+        ></div>
         <div id="bar"><i></i></div>
         <div id="st"></div>
       </div>
 
       <div class="card" id="outCard" style="display: none">
-        <b data-i="res"></b>
-        <div id="allBar" style="display: none; margin: 8px 0">
+        <h2 class="h" data-i="res"></h2>
+        <div id="allBar" style="display: none; margin: 10px 0">
           <div class="row">
             <button id="zipAll" data-i="zipAll"></button
             ><button
@@ -436,87 +914,88 @@
         </div>
         <div id="out"></div>
         <div id="thanks" class="thx" style="display: none">
-          <span data-i="thxT"></span>
-          <a
+          <span data-i="thxT"></span
+          ><a
             class="btn"
             href="https://sociabuzz.com/imaulana17/tribe"
             target="_blank"
             rel="noopener noreferrer"
-            data-i="thxBtn"
-          ></a>
-          <button
-            class="sec"
-            id="thxX"
-            data-i="close"
-            style="flex: none"
-          ></button>
+            ><svg class="ic"><use href="#i-heart" /></svg
+            ><span data-i="thxBtn"></span></a
+          ><button class="sec" id="thxX" data-i="close"></button>
         </div>
       </div>
 
-      <p class="hint" data-i="foot"></p>
-      <section class="vp" aria-labelledby="vpH">
-        <h2 id="vpH" data-i="vpH"></h2>
-        <p class="hint" data-i="vpSub"></p>
-        <div class="vpg">
-          <div class="vpc">
-            <div class="ic">⚡</div>
-            <b data-i="vp1t"></b>
-            <p data-i="vp1d"></p>
+      <details id="how">
+        <summary>
+          <span data-i="howSum"></span
+          ><svg class="ic"><use href="#i-arrow" /></svg>
+        </summary>
+        <ol>
+          <li data-i="how1"></li>
+          <li data-i="how2"></li>
+          <li data-i="how3"></li>
+        </ol>
+      </details>
+
+      <section class="feat">
+        <h2 data-i="featH"></h2>
+        <div class="sub" data-i="featSub" style="margin: 0"></div>
+        <div class="fi">
+          <svg class="ic"><use href="#i-focus" /></svg>
+          <div>
+            <b data-i="f1t"></b>
+            <p data-i="f1d"></p>
           </div>
-          <div class="vpc">
-            <div class="ic">🔒</div>
-            <b data-i="vp2t"></b>
-            <p data-i="vp2d"></p>
+        </div>
+        <div class="fi">
+          <svg class="ic"><use href="#i-sliders" /></svg>
+          <div>
+            <b data-i="f2t"></b>
+            <p data-i="f2d"></p>
           </div>
-          <div class="vpc">
-            <div class="ic">🎛️</div>
-            <b data-i="vp3t"></b>
-            <p data-i="vp3d"></p>
-          </div>
-          <div class="vpc">
-            <div class="ic">📦</div>
-            <b data-i="vp4t"></b>
-            <p data-i="vp4d"></p>
+        </div>
+        <div class="fi">
+          <svg class="ic"><use href="#i-bolt" /></svg>
+          <div>
+            <b data-i="f3t"></b>
+            <p data-i="f3d"></p>
           </div>
         </div>
       </section>
-      <section class="support" aria-labelledby="supH">
-        <h2 id="supH" data-i="supH"></h2>
-        <p data-i="supD"></p>
-        <div class="row" style="align-items: center">
-          <a
-            class="btn"
-            href="https://sociabuzz.com/imaulana17/tribe"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-i="supBtn"
-          ></a>
-          <button class="sec" id="supCopy" data-i="supCopy"></button>
+
+      <section class="support">
+        <div class="cup">
+          <svg class="ic"><use href="#i-cup" /></svg>
         </div>
-        <div class="hint">
-          <a
-            href="https://sociabuzz.com/imaulana17/tribe"
-            target="_blank"
-            rel="noopener noreferrer"
-            >sociabuzz.com/imaulana17/tribe</a
-          >
+        <h2 data-i="supH"></h2>
+        <p data-i="supD"></p>
+        <a
+          class="btn"
+          href="https://sociabuzz.com/imaulana17/tribe"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><svg class="ic"><use href="#i-heart" /></svg
+          ><span data-i="supBtn"></span
+        ></a>
+        <div class="sn">
+          <span data-i="supNote"></span> ·
+          <button id="supCopy" data-i="supCopy"></button>
         </div>
       </section>
     </main>
     <footer>
-      <b data-i="ftBrand"></b>
-      <p data-i="ftNote"></p>
-      <p>
-        <a
-          href="https://sociabuzz.com/imaulana17/tribe"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-i="ftSupport"
-        ></a>
-      </p>
-      <p data-i="ftCopy"></p>
+      <div class="ft">
+        <div class="brand">
+          <span class="logo"
+            ><svg><use href="#i-dots" /></svg></span
+          ><span>potongin</span>
+        </div>
+        <p data-i="ftTag"></p>
+        <p data-i="ftNote"></p>
+        <p data-i="ftCopy"></p>
+      </div>
     </footer>
-
     <script>
       (function () {
         var $ = function (i) {
@@ -538,10 +1017,9 @@
           thxOff = false;
         var I = {
           id: {
-            title: "Pemotong Video",
+            title: "potongin · Potong video langsung di browser",
             pick: "📁 Pilih video dari perangkat",
-            info0:
-              "Pilih video untuk mulai. Format waktu boleh <b>03:00</b>, <b>1:30:00</b>, atau detik saja (<b>180</b>).",
+            info0: "Belum ada video dipilih",
             man: "Manual",
             dur: "Per durasi",
             num: "Jadi N bagian",
@@ -550,18 +1028,18 @@
             autoLnum: "Jumlah bagian",
             gen: "Buat daftar potongan",
             pos: "Posisi video:",
-            setS: "Isi awal",
-            setE: "Isi akhir",
+            setS: "Isi awal dari posisi video",
+            setE: "Isi akhir dari posisi video",
             fastTxt:
               "<b>Mode cepat</b> (khusus MP4/MOV): potong instan tanpa proses ulang. Awal dan akhir mengikuti waktu yang diminta (sebagian pemutar lama bisa menampilkan awal sedikit lebih awal). Matikan untuk potong presisi (lebih lambat).",
             add: "+ Tambah potongan",
-            go: "Potong semua",
+            go: "Potong video",
             res: "Hasil",
             zipAll: "⬇ Unduh semua (ZIP)",
             shareAll: "Bagikan semua",
             foot: "Pemotongan berjalan real-time di browser di mode presisi (durasi potongan = waktu proses); mode cepat instan. Tanpa upload. Biarkan layar menyala dan tab terbuka selama proses.",
-            segS: "Awal (mm:ss / detik)",
-            segE: "Akhir (mm:ss / detik)",
+            segS: "Waktu mulai",
+            segE: "Waktu selesai",
             del: "Hapus",
             segHead: "Daftar potongan ({0})",
             errTot: "Isi durasi total video, mis. 05:30 atau 330.",
@@ -571,7 +1049,7 @@
             genDone: "{0} potongan dibuat.",
             notVideo: "File bukan video.",
             loading: "Memuat {0}…",
-            loaded: "{0} · durasi {1}",
+            loaded: "{0}",
             loadErr:
               "Video tidak bisa dibaca browser (format/codec tidak didukung). Coba MP4 (H.264) atau WebM.",
             recUnsup:
@@ -621,23 +1099,60 @@
             vp4d: "Tanpa akun dan tanpa instal. Simpan satu per satu atau unduh semua hasil sekaligus dalam satu ZIP.",
             ftBrand: "Video Splitter",
             ftNote:
-              "Diproses langsung di perangkatmu. Hasil mode cepat berformat MP4; hasil mode presisi berformat WebM atau MP4 tergantung browser.",
-            ftCopy: "© 2026 Video Splitter",
-            supH: "Dukung pembuat",
-            supD: "Video Splitter gratis, tanpa iklan, dan tanpa mengunggah videomu. Kalau alat ini membantu, kamu bisa mengirim dukungan lewat Sociabuzz. Dukunganmu membantu pembuatnya merawat dan mengembangkan alat ini. Sepenuhnya opsional.",
-            supBtn: "❤ Dukung lewat Sociabuzz",
+              "Hasil mode cepat berformat MP4; hasil mode presisi berformat WebM atau MP4 tergantung browser.",
+            ftCopy: "© 2026 potongin. Dibuat untuk cerita-cerita kecil.",
+            supH: "Bantu potongin tumbuh.",
+            supD: "Suka dengan idenya? Dukunganmu membantu pengembangan fitur dan perawatan alat ini. Secangkir kopi pun berarti banyak.",
+            supBtn: "Traktir kopi",
             supCopy: "Salin tautan",
             supCopied: "Tautan disalin ✓",
             thxT: "Terbantu? Alat ini gratis. Kamu bisa mendukung pembuatnya kalau berkenan.",
             thxBtn: "❤ Dukung",
             close: "Tutup",
             ftSupport: "❤ Dukung pembuat",
+            eyebrow: "Ruang kecil untuk ide besar",
+            h1: "Video kepanjangan? Potong aja.",
+            sub: "Ambil bagian yang kamu butuhkan. Sisakan cerita yang paling berarti.",
+            s1: "Unggah",
+            s2: "Atur potongan",
+            s3: "Simpan",
+            upTitle: "Mulai dari video kamu",
+            upSub: "Pilih video dari perangkatmu",
+            upBtn: "Pilih video",
+            upNote: "MP4, MOV, WEBM · Diproses di perangkatmu, tanpa unggah",
+            tlHint: "Lini masa akan tersedia setelah video dipilih.",
+            optH: "Mau potong seperti apa?",
+            optSub: "Pilih jenis potongan, lalu tentukan waktunya.",
+            optMan: "Simpan bagian",
+            optManD: "Ambil satu bagian atau lebih, buang sisanya.",
+            optSplit: "Bagi per durasi",
+            optSplitD: "Pecah video jadi klip berdurasi sama.",
+            fmtHint:
+              "Format waktu: jam : menit : detik (atau detik saja, mis. 90)",
+            fastT: "Mode cepat",
+            fastD:
+              "Tanpa enkode ulang, hasil langsung jadi. Khusus MP4/MOV. Matikan untuk potongan presisi (lebih lambat).",
+            goHint: "Pilih video dulu untuk mulai memotong.",
+            howSum: "Baru pertama kali? Lihat cara memotong video",
+            how1: "Pilih video dari perangkatmu.",
+            how2: "Pilih jenis potongan, lalu isi waktu mulai dan selesai (misalnya 00:01:30), atau tentukan panjang tiap bagian.",
+            how3: "Tekan Potong video, lalu simpan hasilnya satu per satu atau sekaligus dalam satu ZIP.",
+            featH: "Cukup yang kamu butuhkan.",
+            featSub: "Lebih sedikit distraksi. Lebih banyak ruang berkarya.",
+            f1t: "Fokus ke bagian penting",
+            f1d: "Klip untuk tugas, konten, atau kenangan. Simpan satu bagian atau bagi video jadi beberapa klip.",
+            f2t: "Kontrol yang nggak ribet",
+            f2d: "Pilih jenis potongan dan tentukan waktunya. Semua pengaturan ada dalam satu tempat.",
+            f3t: "Lebih ringan, lebih praktis",
+            f3d: "Mode cepat memotong tanpa enkode ulang pada format yang sesuai, dan videomu tidak pernah diunggah.",
+            supNote: "Sukarela, tanpa kewajiban.",
+            ftTag: "Alat sederhana. Ruang untuk berkarya.",
+            help: "Bantuan",
           },
           en: {
-            title: "Video Splitter",
+            title: "potongin · Cut videos right in your browser",
             pick: "📁 Choose a video from your device",
-            info0:
-              "Choose a video to start. Time can be <b>03:00</b>, <b>1:30:00</b>, or seconds only (<b>180</b>).",
+            info0: "No video selected yet",
             man: "Manual",
             dur: "By duration",
             num: "Into N parts",
@@ -646,18 +1161,18 @@
             autoLnum: "Number of parts",
             gen: "Generate clip list",
             pos: "Video position:",
-            setS: "Set start",
-            setE: "Set end",
+            setS: "Set start from video position",
+            setE: "Set end from video position",
             fastTxt:
               "<b>Fast mode</b> (MP4/MOV only): cuts instantly without re-encoding. Start and end follow the requested times (some older players may show the start slightly earlier). Turn off for precise cutting (slower).",
             add: "+ Add clip",
-            go: "Split all",
+            go: "Cut video",
             res: "Results",
             zipAll: "⬇ Download all (ZIP)",
             shareAll: "Share all",
             foot: "In precise mode, cutting runs in real time in your browser (clip length = processing time); fast mode is instant. No upload. Keep the screen on and the tab open while processing.",
-            segS: "Start (mm:ss / seconds)",
-            segE: "End (mm:ss / seconds)",
+            segS: "Start time",
+            segE: "End time",
             del: "Delete",
             segHead: "Clip list ({0})",
             errTot: "Enter the total video duration, e.g. 05:30 or 330.",
@@ -667,7 +1182,7 @@
             genDone: "{0} clips created.",
             notVideo: "This file is not a video.",
             loading: "Loading {0}…",
-            loaded: "{0} · duration {1}",
+            loaded: "{0}",
             loadErr:
               "The browser cannot read this video (unsupported format/codec). Try MP4 (H.264) or WebM.",
             recUnsup:
@@ -717,17 +1232,55 @@
             vp4d: "No account and no install. Save clips one by one or download all results at once in a single ZIP.",
             ftBrand: "Video Splitter",
             ftNote:
-              "Processed right on your device. Fast mode outputs MP4; precise mode outputs WebM or MP4 depending on your browser.",
-            ftCopy: "© 2026 Video Splitter",
-            supH: "Support the creator",
-            supD: "Video Splitter is free, ad-free, and never uploads your video. If it helped you, you can send support through Sociabuzz. Your support helps the creator maintain and improve this tool. Completely optional.",
-            supBtn: "❤ Support via Sociabuzz",
+              "Fast mode outputs MP4; precise mode outputs WebM or MP4 depending on your browser.",
+            ftCopy: "© 2026 potongin. Made for small stories.",
+            supH: "Help potongin grow.",
+            supD: "Like the idea? Your support helps with new features and keeping this tool running. Even a cup of coffee means a lot.",
+            supBtn: "Buy me a coffee",
             supCopy: "Copy link",
             supCopied: "Link copied ✓",
             thxT: "Did this help? The tool is free. You can support the creator if you like.",
             thxBtn: "❤ Support",
             close: "Close",
             ftSupport: "❤ Support the creator",
+            eyebrow: "A small space for big ideas",
+            h1: "Video too long? Just cut it.",
+            sub: "Keep the part you need. Leave the story that matters most.",
+            s1: "Upload",
+            s2: "Set clips",
+            s3: "Save",
+            upTitle: "Start with your video",
+            upSub: "Choose a video from your device",
+            upBtn: "Choose video",
+            upNote: "MP4, MOV, WEBM · Processed on your device, no upload",
+            tlHint: "The timeline appears once a video is chosen.",
+            optH: "How do you want to cut?",
+            optSub: "Pick a cut type, then set the times.",
+            optMan: "Keep a part",
+            optManD: "Keep one or more parts, drop the rest.",
+            optSplit: "Split by duration",
+            optSplitD: "Break the video into clips of equal length.",
+            fmtHint:
+              "Time format: hour : minute : second (or just seconds, e.g. 90)",
+            fastT: "Fast mode",
+            fastD:
+              "No re-encoding, results are instant. MP4/MOV only. Turn off for precise cutting (slower).",
+            goHint: "Choose a video first to start cutting.",
+            howSum: "First time here? See how to cut a video",
+            how1: "Choose a video from your device.",
+            how2: "Pick a cut type, then enter start and end times (for example 00:01:30), or set the length of each part.",
+            how3: "Tap Cut video, then save results one by one or all at once in a single ZIP.",
+            featH: "Just what you need.",
+            featSub: "Fewer distractions. More room to create.",
+            f1t: "Focus on what matters",
+            f1d: "Clips for assignments, content, or memories. Keep one part or split a video into several clips.",
+            f2t: "Simple control",
+            f2d: "Pick the cut type and set the times. All settings live in one place.",
+            f3t: "Lighter and more practical",
+            f3d: "Fast mode cuts without re-encoding on supported formats, and your video is never uploaded.",
+            supNote: "Voluntary, no obligation.",
+            ftTag: "A simple tool. Room to create.",
+            help: "Help",
           },
         };
         var lang = "id";
@@ -819,7 +1372,7 @@
           var ss = Number.isInteger(s)
             ? p2(s)
             : (s < 10 ? "0" : "") + s.toFixed(1);
-          return (h ? h + ":" + p2(m) : p2(m)) + ":" + ss;
+          return p2(h) + ":" + p2(m) + ":" + ss;
         }
         function parseT(x) {
           x = String(x || "")
@@ -845,10 +1398,10 @@
           d.innerHTML =
             '<div><label data-i="segS">' +
             t("segS") +
-            '</label><input type="text" autocomplete="off" placeholder="00:00"></div>' +
+            '</label><input type="text" autocomplete="off" placeholder="00:00:00"></div>' +
             '<div><label data-i="segE">' +
             t("segE") +
-            '</label><input type="text" autocomplete="off" placeholder="00:30"></div>' +
+            '</label><input type="text" autocomplete="off" placeholder="00:00:30"></div>' +
             '<button class="sec" aria-label="' +
             t("del") +
             '">✕</button>';
@@ -864,7 +1417,7 @@
         }
         function head() {
           var n = segs.children.length;
-          $("segHead").textContent = n ? t("segHead", n) : "";
+          $("segHead").textContent = n > 1 ? t("segHead", n) : "";
         }
         function last() {
           var a = segs.querySelectorAll(".seg");
@@ -882,25 +1435,53 @@
           if (!last()) addSeg();
           last()[1].value = fmt(v.currentTime);
         };
-        v.addEventListener("timeupdate", function () {
-          $("cur").textContent = fmt(v.currentTime);
-        });
+        function tshow() {
+          $("cur").textContent =
+            fmt(v.currentTime) +
+            " / " +
+            fmt(isFinite(v.duration) ? v.duration : 0);
+        }
+        v.addEventListener("timeupdate", tshow);
 
-        var ms = document.querySelectorAll("#modes button");
-        Array.prototype.forEach.call(ms, function (b) {
-          b.onclick = function () {
-            mode = b.getAttribute("data-m");
-            Array.prototype.forEach.call(ms, function (x) {
-              x.classList.toggle("on", x === b);
-            });
-            $("auto").style.display = mode === "man" ? "none" : "block";
-            $("manualBar").style.display = mode === "man" ? "flex" : "none";
-            $("autoV").value = "";
-            setModeUI();
-            $("autoMsg").textContent = "";
-          };
-        });
-
+        function renderModes() {
+          Array.prototype.forEach.call(
+            document.querySelectorAll("[data-m]"),
+            function (b) {
+              var m = b.getAttribute("data-m"),
+                on = b.classList.contains("opt")
+                  ? m === "man"
+                    ? mode === "man"
+                    : mode !== "man"
+                  : m === mode;
+              b.classList.toggle("on", on);
+            },
+          );
+          $("auto").style.display = mode === "man" ? "block" : "block";
+          $("auto").style.display = mode === "man" ? "none" : "block";
+          $("manualBar").style.display = mode === "man" ? "flex" : "none";
+          $("splitTg").style.display = mode === "man" ? "none" : "flex";
+          $("autoV").value = "";
+          setModeUI();
+          $("autoMsg").textContent = "";
+        }
+        Array.prototype.forEach.call(
+          document.querySelectorAll("[data-m]"),
+          function (b) {
+            b.onclick = function () {
+              var m = b.getAttribute("data-m"),
+                was = mode === "man";
+              if (b.classList.contains("opt") && m === "dur" && mode !== "man")
+                m = mode;
+              mode = m;
+              if (was !== (mode === "man")) {
+                segs.innerHTML = "";
+                head();
+                if (mode === "man" && isFinite(v.duration)) addSeg();
+              }
+              renderModes();
+            };
+          },
+        );
         function gen(sc) {
           var am = $("autoMsg");
           try {
@@ -959,10 +1540,16 @@
           if (v.src) URL.revokeObjectURL(v.src);
           go.disabled = true;
           setInfo("loading", f.name);
+          setStep(1);
           v.onloadedmetadata = function () {
             setInfo("loaded", f.name, fmt(v.duration));
             $("totV").value = fmt(v.duration);
             go.disabled = false;
+            setStep(2);
+            tshow();
+            $("tlHint").style.display = "none";
+            $("goHint").style.display = "none";
+            buildTL(v.src);
             if (mode === "man" && !segs.children.length) addSeg();
             else if (mode !== "man" && $("autoV").value !== "") gen(false);
           };
@@ -1361,6 +1948,47 @@
           };
         }
 
+        function setStep(n) {
+          Array.prototype.forEach.call(
+            document.querySelectorAll("#steps .stp"),
+            function (e, i) {
+              e.classList.toggle("on", i + 1 === n);
+              e.classList.toggle("done", i + 1 < n);
+            },
+          );
+        }
+        function buildTL(url) {
+          var cs = document.querySelectorAll("#tl canvas"),
+            i = 0,
+            n = cs.length,
+            tv = document.createElement("video");
+          Array.prototype.forEach.call(cs, function (c) {
+            c.getContext("2d").clearRect(0, 0, c.width, c.height);
+          });
+          tv.muted = true;
+          tv.preload = "auto";
+          tv.playsInline = true;
+          function next() {
+            if (i >= n || !isFinite(tv.duration)) {
+              tv.removeAttribute("src");
+              return;
+            }
+            tv.currentTime = Math.min(
+              Math.max(tv.duration - 0.1, 0),
+              (tv.duration * (i + 0.5)) / n,
+            );
+          }
+          tv.onseeked = function () {
+            try {
+              var c = cs[i];
+              c.getContext("2d").drawImage(tv, 0, 0, c.width, c.height);
+            } catch (e) {}
+            i++;
+            next();
+          };
+          tv.onloadeddata = next;
+          tv.src = url;
+        }
         function checkVideo(blob) {
           return new Promise(function (res) {
             var t = document.createElement("video"),
@@ -1724,6 +2352,7 @@
             st.textContent = t("needSeg");
             return;
           }
+          setStep(2);
           $("thanks").style.display = "none";
           busy = true;
           go.disabled = true;
@@ -1774,6 +2403,7 @@
               addResult(r.blob, name + "_part" + (k + 1) + "." + r.ext, note);
             }
             st.textContent = t("done");
+            setStep(3);
             if (!thxOff) $("thanks").style.display = "flex";
           } catch (e) {
             st.textContent = t("errPre") + errMsg(e);
@@ -1782,6 +2412,12 @@
           go.disabled = false;
           barI.style.width = "100%";
         };
+        function openHow() {
+          var d = $("how");
+          d.open = true;
+          d.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        $("help").onclick = openHow;
         $("thxX").onclick = function () {
           thxOff = true;
           $("thanks").style.display = "none";
@@ -1798,6 +2434,9 @@
             }, 2000);
           } catch (e) {}
         };
+        renderModes();
+        setStep(1);
+        tshow();
         applyLang();
       })();
     </script>
